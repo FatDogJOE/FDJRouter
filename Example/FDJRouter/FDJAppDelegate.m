@@ -7,12 +7,43 @@
 //
 
 #import "FDJAppDelegate.h"
+#import "VC1Controller.h"
+#import "VC2Controller.h"
+#import "VC3Controller.h"
+#import "VC4Controller.h"
+#import "VC5Controller.h"
+#import "VC6Controller.h"
+#import "VC7Controller.h"
+#import "VC8Controller.h"
+#import "VC9Controller.h"
+#import "FDJRouter.h"
 
 @implementation FDJAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [[FDJRouter instance] registerDomain:@"domain1"];
+    [[FDJRouter instance] registerDomain:@"domain2"];
+    [[FDJRouter instance] registerDomain:@"domain3"];
     // Override point for customization after application launch.
+    
+    [[FDJRouter instance] registerPath:@"/path1" forClass:VC1Controller.class];
+    [[FDJRouter instance] registerPath:@"/path1/path2" forClass:VC2Controller.class];
+    [[FDJRouter instance] registerPath:@"/path1/path2/path3" forClass:VC3Controller.class];
+    
+    [[FDJRouter instance] registerPath:@"/path4" forClass:VC4Controller.class];
+    [[FDJRouter instance] registerPath:@"/path4/path5" forClass:VC5Controller.class];
+    [[FDJRouter instance] registerPath:@"/path4/path5/path6" forClass:VC6Controller.class];
+    
+    [[FDJRouter instance] registerPath:@"/path7" forClass:VC7Controller.class];
+    [[FDJRouter instance] registerPath:@"/path7/path8" forClass:VC8Controller.class];
+    [[FDJRouter instance] registerPath:@"/path7/path8/path9" forClass:VC9Controller.class];
+    
+    [[FDJRouter instance] setupRootPages:@[@"router://domain1/path1",@"router://domain2/path4",@"router://domain3/path7"]];
+    
+    self.window.rootViewController = [FDJRouter instance].tabBarController;
+    
     return YES;
 }
 
