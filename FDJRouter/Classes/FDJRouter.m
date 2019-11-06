@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark - Public Methods
+#pragma mark - Public Methodsgit
 
 - (void)registerPath:(NSString * _Nonnull)path forClass:(Class<FDJRouterProtocol>)pageClass {
     _controllers[path] = pageClass;
