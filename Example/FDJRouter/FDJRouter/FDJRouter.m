@@ -126,7 +126,13 @@
     if (domain && vc) {
         FDJNavigationController * navVC = [[FDJNavigationController alloc] initWithRootViewController:vc];
         
-        UIModalPresentationStyle style = UIModalPresentationAutomatic;
+        UIModalPresentationStyle style;
+        
+        if (@available(iOS 13, *)) {
+            style = UIModalPresentationAutomatic;
+        }else {
+            style = UIModalPresentationFullScreen;
+        }
         
         if ([vc respondsToSelector:@selector(preferrdPresentationStlye)]) {
             style = [vc preferrdPresentationStlye];
