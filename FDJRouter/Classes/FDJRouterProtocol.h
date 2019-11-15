@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)alloc;
 - (instancetype)initWithParams:(NSDictionary * _Nullable)params;
+- (UIModalPresentationStyle)preferrdPresentationStlye;
 
 @optional
 

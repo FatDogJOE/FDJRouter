@@ -41,7 +41,7 @@
     return self;
 }
 
-#pragma mark - Public Methods
+#pragma mark - Public Methodsgit
 
 - (void)registerPath:(NSString * _Nonnull)path forClass:(Class<FDJRouterProtocol>)pageClass {
     _controllers[path] = pageClass;
@@ -125,6 +125,15 @@
     
     if (domain && vc) {
         FDJNavigationController * navVC = [[FDJNavigationController alloc] initWithRootViewController:vc];
+        
+        UIModalPresentationStyle style = UIModalPresentationAutomatic;
+        
+        if ([vc respondsToSelector:@selector(preferrdPresentationStlye)]) {
+            style = [vc preferrdPresentationStlye];
+        }
+        
+        navVC.modalPresentationStyle = style;
+        
         vc.pageUrl = url;
         navVC.closeCallback = ^(NSDictionary * _Nullable info) {
             if (finished) {

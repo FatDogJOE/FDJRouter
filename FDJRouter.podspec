@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'FDJRouter'
   s.version          = '0.1.0-beta.1'
-  s.summary          = 'Router for UIViewController'
+  s.summary          = '一个可以处理页面之间传值的Router'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = "一个可以处理页面之间传值的Router"
+  s.description      = "一个可以处理页面之间传值的Router，页面任务完成以后会有回调"
 
   s.homepage         = 'https://github.com/FatDogJOE/FDJRouter'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
