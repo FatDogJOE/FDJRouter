@@ -35,8 +35,9 @@
     
     if (vc.finished) {
         vc.finished(info);
-        [self popViewControllerAnimated:YES];
     }
+    
+    [self popViewControllerAnimated:YES];
 }
 
 - (void)backToURL:(NSString *)url {

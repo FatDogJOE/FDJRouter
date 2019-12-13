@@ -87,8 +87,8 @@
         [self presentUrl:url params:params finishCallback:finished];
     }else {
         NSURL * URL = [NSURL URLWithString:url];
-        
-        if ([URL.host isEqualToString:[self currentNav].domain]) {
+
+        if ([URL.host isEqualToString:[self currentNav].domain] && ([URL.path containsString:[self currentURL].path] || [URL.path isEqualToString:[self currentURL].path])) {
             [self pushUrl:url params:params finishCallback:finished];
         }else {
             [self presentUrl:url params:params finishCallback:finished];
@@ -110,6 +110,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         vc.finished = finished;
         vc.pageUrl = url;
+        vc.openType = OpenTypePush;
         [nav pushViewController:vc animated:YES];
     }
     
@@ -126,7 +127,13 @@
     if (domain && vc) {
         FDJNavigationController * navVC = [[FDJNavigationController alloc] initWithRootViewController:vc];
         
-        UIModalPresentationStyle style = UIModalPresentationAutomatic;
+        UIModalPresentationStyle style;
+        
+        if (@available(iOS 13, *)) {
+            style = UIModalPresentationAutomatic;
+        }else {
+            style = UIModalPresentationFullScreen;
+        }
         
         if ([vc respondsToSelector:@selector(preferrdPresentationStlye)]) {
             style = [vc preferrdPresentationStlye];
@@ -135,6 +142,7 @@
         navVC.modalPresentationStyle = style;
         
         vc.pageUrl = url;
+        vc.openType = OpenTypePresent;
         navVC.closeCallback = ^(NSDictionary * _Nullable info) {
             if (finished) {
                 finished(info);
@@ -193,6 +201,12 @@
         }
         return nav;
     }
+}
+
+- (NSURL *)currentURL {
+    FDJNavigationController * nav = [self currentNav];
+    UIViewController<FDJRouterProtocol> * currentVC = (UIViewController<FDJRouterProtocol> *)[nav topViewController];
+    return [NSURL URLWithString:currentVC.pageUrl];
 }
 
 #pragma mark - UITabbarControllerDelegate

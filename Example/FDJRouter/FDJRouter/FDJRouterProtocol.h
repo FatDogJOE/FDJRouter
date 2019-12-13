@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 
+@property (nonatomic, assign) OpenType openType;
+
 - (FDJNavigationController *)fdj_navigation;
 - (void)configNavigationBar;
 
